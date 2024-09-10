@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('name', length: 255);
+            $table->text('description');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
