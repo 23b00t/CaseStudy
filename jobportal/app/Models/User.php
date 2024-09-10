@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -43,5 +44,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    const ROLE_STANDARD = 'standard';
+    const ROLE_COMPANY = 'company';
+    const ROLE_ADMIN = 'admin';
+
+    // Validierung oder Statusprüfung
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isCompany(): bool
+    {
+        return $this->role === self::ROLE_COMPANY;
+    }
+
+    public function isStandard(): bool
+    {
+        return $this->role === self::ROLE_STANDARD;
     }
 }
