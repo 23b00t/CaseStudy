@@ -21,9 +21,9 @@ class PositionFactory extends Factory
             'description' => $this->fake->paragraph(),
             'location' => $this->fake->city(),
             'salary' => $this->fake->numberBetween(30000, 120000),
-            'company_id' => \App\Models\Company::factory(),
-            'category_id' => \App\Models\Category::factory(),
-            'user_id' => \App\Models\User::factory()->company(),
+            'company_id' => \App\Models\Company::inRandomOrder()->first()->id ?? \App\Models\Company::factory(),
+            'category_id' => \App\Models\Category::inRandomOrder()->first()->id ?? \App\Models\Category::factory(),
+            'user_id' => \App\Models\User::where('role', 'company')->inRandomOrder()->first()->id ?? \App\Models\User::factory()->company(),
         ];
     }
 }

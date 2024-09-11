@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->fake->company(),
             'description' => $this->fake->paragraph(),
-            'user_id' => \App\Models\User::factory()->company(),
+            'user_id' => \App\Models\User::where('role', 'company')->inRandomOrder()->first()->id ?? \App\Models\User::factory()->company(),
         ];
     }
 }
