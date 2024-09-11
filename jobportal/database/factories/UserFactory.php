@@ -41,4 +41,14 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Create user that has the role company to use in Position- and CompanyFactory
+     */
+    public function company(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'company',
+        ]);
+    }
 }

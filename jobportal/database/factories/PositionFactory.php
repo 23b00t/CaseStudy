@@ -17,7 +17,13 @@ class PositionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->fake->jobTitle(),
+            'description' => $this->fake->paragraph(),
+            'location' => $this->fake->city(),
+            'salary' => $this->fake->numberBetween(30000, 120000),
+            'company_id' => \App\Models\Company::factory(),
+            'category_id' => \App\Models\Category::factory(),
+            'user_id' => \App\Models\User::factory()->company(),
         ];
     }
 }

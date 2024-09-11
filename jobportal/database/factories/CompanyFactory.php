@@ -17,7 +17,9 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->fake->company(),
+            'description' => $this->fake->paragraph(),
+            'user_id' => \App\Models\User::factory()->company(),
         ];
     }
 }
