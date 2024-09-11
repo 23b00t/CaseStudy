@@ -17,8 +17,8 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->fake->company(),
-            'description' => $this->fake->paragraph(),
+            'name' => $this->faker->company(),
+            'description' => $this->faker->paragraph(),
             'user_id' => \App\Models\User::where('role', 'company')->inRandomOrder()->first()->id ?? \App\Models\User::factory()->company(),
         ];
     }
