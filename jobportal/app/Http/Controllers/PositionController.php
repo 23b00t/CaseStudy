@@ -13,7 +13,10 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        $allPositions = Position::all();
+
+        return View::make('positions.index')
+            ->with('allPositions', '$allPositions');
     }
 
     /**
@@ -21,7 +24,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('positions.create');
     }
 
     /**
@@ -29,23 +32,39 @@ class PositionController extends Controller
      */
     public function store(StorePositionRequest $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|integer',
+        ]);
+
+        Position::create($request->all());
+
+        return redirect()->route('positions.index')
+            ->with('success', 'Jobanzeige erfolgreich erstellt!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Position $position)
+    public function show(Position $id)
     {
-        //
+        $position = Position::find($id);
+
+        return View::make(positions.show)
+            ->with('position', '$position');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Position $position)
+    public function edit(Position $id)
     {
-        //
+        $position = Position::find($id);
+
+        return View::make(positions.edit)
+            ->with('position', '$position');
     }
 
     /**
@@ -53,14 +72,28 @@ class PositionController extends Controller
      */
     public function update(UpdatePositionRequest $request, Position $position)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|integer',
+        ]);
+
+        $position->update($request->all());
+
+        return redirect()->route('positions.index')
+            ->with('success', 'Jobanzeige erfolgreich aktualisiert!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Position $position)
+    public function destroy(Position $id)
     {
-        //
+        $position = Position::find($id);
+        $position->delete();
+
+        return redirect()->route('positions.index')
+            ->with('success', 'Jobanzeige erfolgreich gelöscht!');
     }
 }
