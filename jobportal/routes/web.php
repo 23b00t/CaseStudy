@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 Route::apiResources([
-    'positions' => PositionController::class,
-    'companys' => CompanyController::class,
-    'categorys' => CategoryController::class,
+    'positions' => App\Http\Controllers\PositionController::class,
+    'companys' => App\Http\Controllers\CompanyController::class,
+    'categorys' => App\Http\Controllers\CategoryController::class,
 ]);

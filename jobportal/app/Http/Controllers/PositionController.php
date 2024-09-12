@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
+// Make the views available
+use Illuminate\Support\Facades\View;
 
 class PositionController extends Controller
 {
@@ -16,7 +18,7 @@ class PositionController extends Controller
         $allPositions = Position::all();
 
         return View::make('positions.index')
-            ->with('allPositions', '$allPositions');
+            ->with('allPositions', $allPositions);
     }
 
     /**
@@ -53,7 +55,7 @@ class PositionController extends Controller
         $position = Position::find($id);
 
         return View::make(positions.show)
-            ->with('position', '$position');
+            ->with('position', $position);
     }
 
     /**
@@ -64,7 +66,7 @@ class PositionController extends Controller
         $position = Position::find($id);
 
         return View::make(positions.edit)
-            ->with('position', '$position');
+            ->with('position', $position);
     }
 
     /**
