@@ -9,8 +9,11 @@
                 <h3>Job Beschreibung bearbeiten</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('positions.store') }}" method="POST">
+                <form action="{{ route('positions.update', $position->id) }}" method="POST">
+                    <!-- Create CSRF-Token -->
                     @csrf
+                    <!-- Ensure the use of PUT, method spoofing -->
+                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="title" class="form-label">Titel</label>
