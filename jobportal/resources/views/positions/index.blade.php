@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1>Liste der Positionen</h1>
+    <h1>Aktuelle Stellenausschreibungen</h1>
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
