@@ -50,11 +50,11 @@ class PositionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Position $id)
+    public function show($id)
     {
-        $position = Position::find($id);
-
-        return View::make(positions.show)
+        // Eager loading of company to have in the view access to $position->company->name
+        $position = Position::with('company')->find($id);
+        return View::make('positions.show')
             ->with('position', $position);
     }
 
