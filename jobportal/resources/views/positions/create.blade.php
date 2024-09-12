@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Neuer Job')
-
-@section('content')
+<x-app-layout>
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
@@ -38,5 +34,5 @@
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
 

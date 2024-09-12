@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Alle Jobs')
-
-@section('content')
+<x-app-layout>
     <h1>Liste der Positionen</h1>
     <table class="table table-striped table-bordered">
         <thead>
@@ -32,5 +28,5 @@
         @endforeach
         </tbody>
     </table>
-@endsection
+</x-app-layout>
 
