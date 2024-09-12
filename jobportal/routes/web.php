@@ -6,8 +6,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::apiResources([
-    'positions' => App\Http\Controllers\PositionController::class,
-    'companys' => App\Http\Controllers\CompanyController::class,
-    'categorys' => App\Http\Controllers\CategoryController::class,
-]);
+Route::resource('positions', App\Http\Controllers\PositionController::class);
+Route::resource('companys', App\Http\Controllers\CompanyController::class);
+Route::resource('categorys', App\Http\Controllers\CategoryController::class);

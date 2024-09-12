@@ -54,6 +54,7 @@ class PositionController extends Controller
     {
         // Eager loading of company to have in the view access to $position->company->name
         $position = Position::with('company')->find($id);
+
         return View::make('positions.show')
             ->with('position', $position);
     }
@@ -61,11 +62,11 @@ class PositionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Position $id)
+    public function edit($id)
     {
         $position = Position::find($id);
 
-        return View::make(positions.edit)
+        return View::make('positions.edit')
             ->with('position', $position);
     }
 
