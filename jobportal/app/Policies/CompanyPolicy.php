@@ -46,7 +46,8 @@ class CompanyPolicy
      */
     public function delete(User $user, Company $company): bool
     {
-        //
+        // Only the creator of the company can delete it
+        return $user->id === $company->user_id;
     }
 
     /**

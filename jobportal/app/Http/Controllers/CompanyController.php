@@ -10,7 +10,7 @@ use App\Models\Company;
 use Illuminate\Support\Facades\View;
 
 // Authorization
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
@@ -96,6 +96,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        // Check CompanyPolicy for permission
+        Gate::authorize('delete', $company);
+
         $company->delete();
 
         return redirect()->route('companys.index')

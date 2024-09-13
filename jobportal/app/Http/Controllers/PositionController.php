@@ -11,7 +11,7 @@ use App\Models\Company;
 use Illuminate\Support\Facades\View;
 
 // Authorization
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 
 class PositionController extends Controller
 {
@@ -107,7 +107,8 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        $this->authorize('update', $position);
+        // Check PositionPoicy for permission
+        Gate::authorize('delete', $position);
 
         $position->delete();
 
