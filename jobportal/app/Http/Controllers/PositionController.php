@@ -43,7 +43,7 @@ class PositionController extends Controller
         // Überprüfe, ob der Benutzer die Erlaubnis hat, eine Position zu erstellen
         // Gate::authorize('create', Position::class);
 
-        // Validierung der Anfrage
+        // Validate request
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -55,7 +55,7 @@ class PositionController extends Controller
         $userId = auth()->id();
         $company = Company::where('user_id', $userId)->first();
 
-        // Erstelle eine neue Position und setze 'user_id' und 'company_id'
+        // Create new Position
         Position::create([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
@@ -96,16 +96,7 @@ class PositionController extends Controller
      */
     public function update(UpdatePositionRequest $request, Position $position)
     {
-        $this->authorize('update', $position);
-
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'location' => 'required',
-            'salary' => 'required|integer',
-        ]);
-
-        $position->update($request->all());
+        $position->update($request->validated());
 
         return redirect()->route('positions.index')
             ->with('success', 'Jobanzeige erfolgreich aktualisiert!');

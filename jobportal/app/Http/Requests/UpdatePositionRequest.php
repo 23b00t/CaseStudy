@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Position;
+use App\Models\Company;
 
 class UpdatePositionRequest extends FormRequest
 {
@@ -11,7 +13,17 @@ class UpdatePositionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Get the positionId from the route
+        $positionId = $this->route('position'); // Hole die Position-ID aus der Route
+        $position = Position::find($positionId)->first();
+
+        // Get the Company the user has created
+        $userId = auth()->id();
+        $company = Company::where('user_id', $userId)->first();
+        // dd($position->company_id, $company->id);
+
+        // Ensure that $position is not NULL and the position was created by the current user
+        return $position && $company->id === $company->id;
     }
 
     /**
@@ -22,7 +34,10 @@ class UpdatePositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|integer',
         ];
     }
 }

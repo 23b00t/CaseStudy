@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Company;
 
 class UpdateCompanyRequest extends FormRequest
 {
@@ -11,7 +12,11 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Get the companyId from the route
+        $company = request()->route('company');
+
+        // Ensure that $company is not NULL and the company belongs to the current user
+        return $company && $company->user_id === auth()->id();
     }
 
     /**
@@ -22,7 +27,8 @@ class UpdateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'description' => 'required',
         ];
     }
 }
