@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.index')">
                         {{ __('Jobs') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')">
+                        {{ __('Anzeige erstellen') }}
+                    </x-nav-link>
                 </div>
             </div>
 

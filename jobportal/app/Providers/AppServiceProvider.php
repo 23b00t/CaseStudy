@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// Include Policies
+use App\Models\Order;
+use App\Policies\OrderPolicy;
+use Illuminate\Support\Facades\Gate;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(Position::class, PositionPolicy::class);
     }
 }

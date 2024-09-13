@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
+use App\Models\Company;
 
 // Make the views available
 use Illuminate\Support\Facades\View;
+
+// Authorization
+// use Illuminate\Support\Facades\Gate;
 
 class PositionController extends Controller
 {
@@ -27,6 +31,7 @@ class PositionController extends Controller
      */
     public function create()
     {
+        // Gate::authorize('create', Position::class);
         return View::make('positions.create');
     }
 
@@ -35,6 +40,10 @@ class PositionController extends Controller
      */
     public function store(StorePositionRequest $request)
     {
+        // Überprüfe, ob der Benutzer die Erlaubnis hat, eine Position zu erstellen
+        // Gate::authorize('create', Position::class);
+
+        // Validierung der Anfrage
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -42,12 +51,23 @@ class PositionController extends Controller
             'salary' => 'required|integer',
         ]);
 
-        Position::create($request->all());
+        // Get the Company the user has created
+        $userId = auth()->id();
+        $company = Company::where('user_id', $userId)->first();
+
+        // Erstelle eine neue Position und setze 'user_id' und 'company_id'
+        Position::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'location' => $request->input('location'),
+            'salary' => $request->input('salary'),
+            'company_id' => $company->id,
+            'user_id' => $userId,
+        ]);
 
         return redirect()->route('positions.index')
             ->with('success', 'Jobanzeige erfolgreich erstellt!');
     }
-
     /**
      * Display the specified resource.
      */
@@ -76,6 +96,8 @@ class PositionController extends Controller
      */
     public function update(UpdatePositionRequest $request, Position $position)
     {
+        $this->authorize('update', $position);
+
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -92,9 +114,10 @@ class PositionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Position $id)
+    public function destroy(Position $position)
     {
-        $position = Position::find($id);
+        $this->authorize('update', $position);
+
         $position->delete();
 
         return redirect()->route('positions.index')

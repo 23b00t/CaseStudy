@@ -11,7 +11,7 @@ class StorePositionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->user()->isCompany();
     }
 
     /**
@@ -22,7 +22,10 @@ class StorePositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'salary' => 'required|integer',
         ];
     }
 }

@@ -9,6 +9,9 @@ use App\Models\Company;
 // Make the views available
 use Illuminate\Support\Facades\View;
 
+// Authorization
+// use Illuminate\Support\Facades\Gate;
+
 class CompanyController extends Controller
 {
     /**
@@ -40,7 +43,11 @@ class CompanyController extends Controller
             'description' => 'required',
         ]);
 
-        Company::create($request->all());
+        Company::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'user_id' => auth()->id(),
+        ]);
 
         return redirect()->route('companys.index')
             ->with('success', 'Firma erfolgreich erstellt!');
@@ -89,7 +96,6 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company = Company::find($id);
         $company->delete();
 
         return redirect()->route('companys.index')

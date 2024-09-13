@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+// to use Redirect
+use Illuminate\Support\Facades\Redirect;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -46,6 +49,10 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        if ($user->role === 'company') {
+            return Redirect::route('companys.create');
+        }
 
         return redirect(route('dashboard', absolute: false));
     }

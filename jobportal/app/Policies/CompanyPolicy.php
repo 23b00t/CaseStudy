@@ -21,7 +21,8 @@ class CompanyPolicy
      */
     public function view(User $user, Company $company): bool
     {
-        //
+        // Everyone can view
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class CompanyPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === 'company';
     }
 
     /**
