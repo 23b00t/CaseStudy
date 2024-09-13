@@ -21,7 +21,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        $allPositions = Position::all();
+        // Show newest first, 20 per page
+        $allPositions = Position::orderBy('updated_at', 'desc')->paginate(20);
 
         return View::make('positions.index')
             ->with('allPositions', $allPositions);

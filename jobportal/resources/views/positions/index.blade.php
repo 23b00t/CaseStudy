@@ -34,5 +34,9 @@
         @endforeach
         </tbody>
     </table>
+    <!-- Pagination Links -->
+    <div class="pagination">
+        {{ $allPositions->links() }}
+    </div>
 </x-app-layout>
 

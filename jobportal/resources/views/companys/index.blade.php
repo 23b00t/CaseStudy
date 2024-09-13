@@ -32,5 +32,10 @@
         @endforeach
         </tbody>
     </table>
+
+    <!-- Pagination Links -->
+    <div class="pagination">
+        {{ $allCompanys->links() }}
+    </div>
 </x-app-layout>
 

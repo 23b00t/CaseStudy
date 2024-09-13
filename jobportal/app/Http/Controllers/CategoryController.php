@@ -19,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $allCategorys = Category::all();
+        // Order alphabetically, 20 per page
+        $allCategorys = Category::orderBy('name', 'asc')->paginate(20);
 
         return View::make('categorys.index')
             ->with('allCategorys', $allCategorys);

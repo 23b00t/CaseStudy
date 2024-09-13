@@ -32,5 +32,10 @@
         @endforeach
         </tbody>
     </table>
+
+    <!-- Pagination Links -->
+    <div class="pagination">
+        {{ $allCategorys ->links() }}
+    </div>
 </x-app-layout>
 
