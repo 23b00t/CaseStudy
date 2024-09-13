@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\Position;
 
 // Make the views available
 use Illuminate\Support\Facades\View;
@@ -60,9 +61,12 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
+        $positions = Position::where('category_id', $category->id)->get();
 
-        return View::make('categorys.show')
-            ->with('category', $category);
+        return view('categorys.show', [
+            'category' => $category,
+            'positions' => $positions
+        ]);
     }
 
     /**
