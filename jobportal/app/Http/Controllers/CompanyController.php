@@ -38,6 +38,12 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
+        // Check if user has already a company; only one company per user allowed
+        $userId = auth()->id();
+        if (Company::where('user_id', $userId)->exists()) {
+            return redirect()->back()->withErrors('Du kannst nur eine Firma erstellen!');
+        }
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -46,7 +52,7 @@ class CompanyController extends Controller
         Company::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
         ]);
 
         return redirect()->route('companys.index')
