@@ -9,23 +9,6 @@ use Illuminate\Auth\Access\Response;
 class PositionPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the position.
-     */
-    public function view(User $user, Position $position): bool
-    {
-        // Everyone can view positions
-        return true;
-    }
-
-    /**
      * Determine whether the user can create positions.
      */
     public function create(User $user): bool
@@ -50,21 +33,5 @@ class PositionPolicy
     {
         // Only the creator of the position can delete it
         return $user->id === $position->user_id;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Position $position): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Position $position): bool
-    {
-        //
     }
 }

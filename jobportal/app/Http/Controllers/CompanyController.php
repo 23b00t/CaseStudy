@@ -30,6 +30,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        // Check CompanyPolicy for permission
+        Gate::authorize('create', Company::class);
+
         return View::make('companys.create');
     }
 
@@ -76,6 +79,9 @@ class CompanyController extends Controller
     public function edit($id)
     {
         $company = Company::find($id);
+
+        // Check CompanyPolicy for permission
+        Gate::authorize('update', $company);
 
         return View::make('companys.edit')
             ->with('company', $company);

@@ -14,15 +14,21 @@
                 <td>{{ $value->location }}</td>
 
                 <td>
-                    <form action="{{ url('positions/' . $value->id) }}" method="POST" class="pull-right">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-warning">Jobangebot löschen</button>
-                    </form>
+                    <!-- Check if the user is allowed to delete position; otherwise don't show the link -->
+                    @can('delete', $value)
+                        <form action="{{ url('positions/' . $value->id) }}" method="POST" class="pull-right">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-warning">Jobangebot löschen</button>
+                        </form>
+                    @endcan
 
                     <a class="btn btn-small btn-success" href="{{ url('positions/' . $value->id) }}">Angebot anzeigen</a>
 
-                    <a class="btn btn-small btn-info" href="{{ url('positions/' . $value->id . '/edit') }}">Angebot bearbeiten</a>
+                    <!-- Check if the user is allowed to edit position; otherwise don't show the link -->
+                    @can('update', $value)
+                        <a class="btn btn-small btn-info" href="{{ url('positions/' . $value->id . '/edit') }}">Angebot bearbeiten</a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

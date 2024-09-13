@@ -12,15 +12,21 @@
                 <td>{{ $value->name }}</td>
 
                 <td>
-                    <form action="{{ url('categorys/' . $value->id) }}" method="POST" class="pull-right">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-warning">Kategorie löschen</button>
-                    </form>
+                    <!-- Check if the user is allowed to delete categories; otherwise don't show the link -->
+                    @can('delete', $value)
+                        <form action="{{ url('categorys/' . $value->id) }}" method="POST" class="pull-right">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-warning">Kategorie löschen</button>
+                        </form>
+                    @endcan
 
                     <a class="btn btn-small btn-success" href="{{ url('categorys/' . $value->id) }}">Kategorie anzeigen</a>
 
-                    <a class="btn btn-small btn-info" href="{{ url('categorys/' . $value->id . '/edit') }}">Kategorie bearbeiten</a>
+                    <!-- Check if the user is allowed to edit categories; otherwise don't show the link -->
+                    @can('update', $value)
+                        <a class="btn btn-small btn-info" href="{{ url('categorys/' . $value->id . '/edit') }}">Kategorie bearbeiten</a>
+                    @endcan
                 </td>
             </tr>
         @endforeach

@@ -18,18 +18,27 @@
                     <x-nav-link :href="route('positions.index')" :active="request()->routeIs('positions.index')">
                         {{ __('Jobs') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')">
-                        {{ __('Anzeige erstellen') }}
-                    </x-nav-link>
+
+                    <!-- Check if the user is allowed to create positions; otherwise don't show the link -->
+                    @can('create', \App\Models\Position::class)
+                        <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')">
+                            {{ __('Anzeige erstellen') }}
+                        </x-nav-link>
+                    @endcan
+
                     <x-nav-link :href="route('companys.index')" :active="request()->routeIs('companys.index')">
                         {{ __('Firmen anzeigen') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categorys.index')" :active="request()->routeIs('categorys.index')">
                         {{ __('Kategorien anzeigen') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categorys.create')" :active="request()->routeIs('categorys.create')">
-                        {{ __('Kategorie erstellen') }}
-                    </x-nav-link>
+
+                    <!-- Check if the user is allowed to create categories; otherwise don't show the link -->
+                    @can('create', \App\Models\Category::class)
+                        <x-nav-link :href="route('categorys.create')" :active="request()->routeIs('categorys.create')">
+                            {{ __('Kategorie erstellen') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

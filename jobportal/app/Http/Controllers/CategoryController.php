@@ -30,6 +30,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        // Check CompanyPolicy for permission
+        Gate::authorize('create', Category::class);
+
         return View::make('categorys.create');
     }
 
@@ -67,6 +70,9 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
+
+        // Check Policy for permission
+        Gate::authorize('update', $category);
 
         return View::make('categorys.edit')
             ->with('category', $category);

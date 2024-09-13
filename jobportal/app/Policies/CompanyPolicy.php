@@ -9,23 +9,6 @@ use Illuminate\Auth\Access\Response;
 class CompanyPolicy
 {
     /**
-     * Determine whether the user can view any models.
-     */
-    public function viewAny(User $user): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Company $company): bool
-    {
-        // Everyone can view
-        return true;
-    }
-
-    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
@@ -38,7 +21,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
-        //
+        return $user->id === $company->user_id;
     }
 
     /**
@@ -48,21 +31,5 @@ class CompanyPolicy
     {
         // Only the creator of the company can delete it
         return $user->id === $company->user_id;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Company $company): bool
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Company $company): bool
-    {
-        //
     }
 }

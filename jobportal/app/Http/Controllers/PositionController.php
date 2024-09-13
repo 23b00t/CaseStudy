@@ -32,6 +32,7 @@ class PositionController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Position::class);
         $categories = Category::all();
         return view('positions.create', compact('categories'));
     }
@@ -41,9 +42,6 @@ class PositionController extends Controller
      */
     public function store(StorePositionRequest $request)
     {
-        // Überprüfe, ob der Benutzer die Erlaubnis hat, eine Position zu erstellen
-        // Gate::authorize('create', Position::class);
-
         // Validate request
         $request->validate([
             'title' => 'required',
@@ -89,6 +87,8 @@ class PositionController extends Controller
     public function edit($id)
     {
         $position = Position::find($id);
+        // Check PositionPoicy for permission
+        Gate::authorize('update', $position);
 
         return View::make('positions.edit')
             ->with('position', $position);
