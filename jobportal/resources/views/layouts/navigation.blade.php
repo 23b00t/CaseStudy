@@ -21,6 +21,12 @@
                     <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')">
                         {{ __('Anzeige erstellen') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('companys.index')" :active="request()->routeIs('companys.index')">
+                        {{ __('Firmen anzeigen') }}
+                    </x-nav-link>
+                    <!-- <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')"> -->
+                    <!--     {{ __('Anzeige erstellen') }} -->
+                    <!-- </x-nav-link> -->
                 </div>
             </div>
 

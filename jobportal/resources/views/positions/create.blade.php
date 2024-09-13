@@ -27,6 +27,16 @@
                         <label for="salary" class="form-label">Gehalt</label>
                         <input type="number" class="form-control" id="salary" name="salary" >
                     </div>
+
+                    <div class="mb-3">
+                        <label for="category_id" class="form-label">Kategorie</label>
+                        <select class="form-control" id="category_id" name="category_id" required>
+                            <option value="">Wähle eine Kategorie</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
             </div>
 
                     <button type="submit" class="btn btn-primary">Speichern</button>

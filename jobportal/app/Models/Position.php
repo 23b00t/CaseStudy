@@ -11,7 +11,7 @@ class Position extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'location', 'salary', 'company_id', 'user_id'
+        'title', 'description', 'location', 'salary', 'category_id', 'company_id', 'user_id'
     ];
 
     public function company()
@@ -22,5 +22,10 @@ class Position extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

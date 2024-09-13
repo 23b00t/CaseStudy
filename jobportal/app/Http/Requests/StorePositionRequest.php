@@ -26,6 +26,7 @@ class StorePositionRequest extends FormRequest
             'description' => 'required',
             'location' => 'required',
             'salary' => 'required|integer',
+            'category_id',
         ];
     }
 }

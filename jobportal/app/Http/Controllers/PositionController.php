@@ -6,6 +6,7 @@ use App\Http\Requests\StorePositionRequest;
 use App\Http\Requests\UpdatePositionRequest;
 use App\Models\Position;
 use App\Models\Company;
+use App\Models\Category;
 
 // Make the views available
 use Illuminate\Support\Facades\View;
@@ -31,8 +32,8 @@ class PositionController extends Controller
      */
     public function create()
     {
-        // Gate::authorize('create', Position::class);
-        return View::make('positions.create');
+        $categories = Category::all();
+        return view('positions.create', compact('categories'));
     }
 
     /**
@@ -49,6 +50,7 @@ class PositionController extends Controller
             'description' => 'required',
             'location' => 'required',
             'salary' => 'required|integer',
+            'category_id',
         ]);
 
         // Get the Company the user has created
@@ -61,6 +63,7 @@ class PositionController extends Controller
             'description' => $request->input('description'),
             'location' => $request->input('location'),
             'salary' => $request->input('salary'),
+            'category_id' => $request->input('category_id'),
             'company_id' => $company->id,
             'user_id' => $userId,
         ]);
@@ -74,7 +77,7 @@ class PositionController extends Controller
     public function show($id)
     {
         // Eager loading of company to have in the view access to $position->company->name
-        $position = Position::with('company')->find($id);
+        $position = Position::with('company', 'category')->find($id);
 
         return View::make('positions.show')
             ->with('position', $position);

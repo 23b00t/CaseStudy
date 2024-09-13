@@ -9,6 +9,7 @@
                 <p class="card-text"><strong>Ort:</strong> {{ $position->location }}</p>
                 <p class="card-text"><strong>Gehalt:</strong> {{ $position->salary }}</p>
                 <p class="card-text"><strong>Firma:</strong> {{ $position->company->name }}</p>
+                <p class="card-text"><strong>Kategorie:</strong>  {{ $position->category->name ?? 'Keine Kategorie zugewiesen' }}</p>
             </div>
             <div class="card-footer text-muted">
                 <a href="{{ url()->previous() }}" class="btn btn-primary">Zurück zur Übersicht</a>
