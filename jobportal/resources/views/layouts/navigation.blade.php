@@ -24,9 +24,12 @@
                     <x-nav-link :href="route('companys.index')" :active="request()->routeIs('companys.index')">
                         {{ __('Firmen anzeigen') }}
                     </x-nav-link>
-                    <!-- <x-nav-link :href="route('positions.create')" :active="request()->routeIs('positions.create')"> -->
-                    <!--     {{ __('Anzeige erstellen') }} -->
-                    <!-- </x-nav-link> -->
+                    <x-nav-link :href="route('categorys.index')" :active="request()->routeIs('categorys.index')">
+                        {{ __('Kategorien anzeigen') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('categorys.create')" :active="request()->routeIs('categorys.create')">
+                        {{ __('Kategorie erstellen') }}
+                    </x-nav-link>
                 </div>
             </div>
 

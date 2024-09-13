@@ -2,20 +2,15 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <h3>Erstelle dein Unternehmen</h3>
+                <h3>Erstelle eine Kategorie</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('companys.store') }}" method="POST">
+                <form action="{{ route('categorys.store') }}" method="POST">
                     @csrf
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Beschreibung</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required> </textarea>
                     </div>
             </div>
 

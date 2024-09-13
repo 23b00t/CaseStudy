@@ -2,20 +2,18 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <h3>Erstelle dein Unternehmen</h3>
+                <h3>Kategorie bearbeiten</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('companys.store') }}" method="POST">
+                <form action="{{ route('categorys.update', $category->id) }}" method="POST">
+                    <!-- Create CSRF-Token -->
                     @csrf
+                    <!-- Ensure the use of PUT, method spoofing -->
+                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Beschreibung</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required> </textarea>
+                        <input type="text" class="form-control" id="name" name="name" value={{ $category->name }} required>
                     </div>
             </div>
 

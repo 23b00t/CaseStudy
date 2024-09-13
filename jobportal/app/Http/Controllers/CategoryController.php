@@ -6,6 +6,12 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 
+// Make the views available
+use Illuminate\Support\Facades\View;
+
+// Authorization
+use Illuminate\Support\Facades\Gate;
+
 class CategoryController extends Controller
 {
     /**
@@ -13,7 +19,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $allCategorys = Category::all();
+
+        return View::make('categorys.index')
+            ->with('allCategorys', $allCategorys);
     }
 
     /**
@@ -21,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('categorys.create');
     }
 
     /**
@@ -29,23 +38,38 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        Category::create([
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect()->route('categorys.index')
+            ->with('success', 'Kategorie erfolgreich erstellt!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $category = Category::find($id);
+
+        return View::make('categorys.show')
+            ->with('category', $category);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        return View::make('categorys.edit')
+            ->with('category', $category);
     }
 
     /**
@@ -53,7 +77,10 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+
+        return redirect()->route('categorys.index')
+            ->with('success', 'Kategorie erfolgreich aktualisiert!');
     }
 
     /**
@@ -61,6 +88,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // Check Policy for permission
+        Gate::authorize('delete', $category);
+
+        $category->delete();
+
+        return redirect()->route('categorys.index')
+            ->with('success', 'Kategorie erfolgreich gelöscht!');
     }
 }
