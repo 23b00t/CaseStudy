@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register Policies
         Gate::policy(Position::class, PositionPolicy::class);
         Gate::policy(Company::class, CompanyPolicy::class);
         Gate::policy(Category::class, CategoryPolicy::class);

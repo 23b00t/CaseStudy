@@ -46,11 +46,11 @@ class User extends Authenticatable
         ];
     }
 
+    // Check role of loged in user
     const ROLE_STANDARD = 'standard';
     const ROLE_COMPANY = 'company';
     const ROLE_ADMIN = 'admin';
 
-    // Validierung oder Statusprüfung
     public function isAdmin(): bool
     {
         return $this->role === self::ROLE_ADMIN;
