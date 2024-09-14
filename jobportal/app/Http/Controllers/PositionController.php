@@ -33,8 +33,12 @@ class PositionController extends Controller
      */
     public function create()
     {
+        // Link policy
         Gate::authorize('create', Position::class);
+
+        // Get all Categories to select one during creation process
         $categories = Category::all();
+
         return view('positions.create', compact('categories'));
     }
 
@@ -49,7 +53,7 @@ class PositionController extends Controller
             'description' => 'required',
             'location' => 'required',
             'salary' => 'required|integer',
-            'category_id',
+            'category_id' => 'required|integer',
         ]);
 
         // Get the Company the user has created

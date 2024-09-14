@@ -13,6 +13,7 @@ class CompanyPolicy
      */
     public function create(User $user): bool
     {
+        // Only users with the "company" role can create
         return $user->role === 'company';
     }
 
@@ -21,6 +22,7 @@ class CompanyPolicy
      */
     public function update(User $user, Company $company): bool
     {
+        // only owners of a company can edit or update it
         return $user->id === $company->user_id;
     }
 

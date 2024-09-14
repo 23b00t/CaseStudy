@@ -61,6 +61,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
+
+        // Get all positons associated to thiw category to display related positions
         $positions = Position::where('category_id', $category->id)->get();
 
         return view('categorys.show', [

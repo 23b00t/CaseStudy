@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+
+// Only users with the "company" role can create, update and delete categories
 class CategoryPolicy
 {
     /**
