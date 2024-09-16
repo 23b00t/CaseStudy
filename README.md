@@ -156,7 +156,9 @@
 ## Weitere Todos 
 - Dokumentation schreiben/generieren
   - [PHPDoc auf Wikipedia](https://de.wikipedia.org/wiki/PHPDoc)
-  - composer global require phpdocumentor/phpdocumentor
+  ``` bash
+  composer global require phpdocumentor/phpdocumentor
+  ```
 - Unittests
   - [Laravel Testing](https://laravel.com/docs/11.x/testing)
   - [Kinsta Blog Unit Testing](https://kinsta.com/de/blog/laravel-unit-testing)
