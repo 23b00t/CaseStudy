@@ -1,4 +1,4 @@
-# Case Study
+# Projekt Dokumentation
 
 ## Vorbereitung
   ``` bash
