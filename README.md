@@ -153,3 +153,18 @@
 - Authentication middleware auf alle Routen
 - config/app.php bearbeitet
 
+## Weitere Todos 
+- Dokumentation schreiben/generieren
+  - [PHPDoc auf Wikipedia](https://de.wikipedia.org/wiki/PHPDoc)
+  - composer global require phpdocumentor/phpdocumentor
+- Unittests
+  - [Laravel Testing](https://laravel.com/docs/11.x/testing)
+  - [Kinsta Blog Unit Testing](https://kinsta.com/de/blog/laravel-unit-testing)
+- Zurück-Buttons sind nicht ideal (leiten zur letzten Seite zurück, nicht zu ihrem Parent) -> Breadcrumbs verwenden
+- Die Edit-Formulare sind falsch vorausgefüllt -> Daten, die übergeben werden, geprüft, sie sind korrekt -> Caching-Problem?
+- Bilderupload einfügen
+- Filter- und Suchfunktionen implementieren
+- Admin-Rolle nutzen/entfernen
+- Styling verbessern
+- Bootstrap zu Tailwind konvertieren? 
+  - [Tailwindo](https://github.com/awssat/tailwindo)
